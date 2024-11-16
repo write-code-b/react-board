@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Login = () => {
   const { setToken, setUsername, username } = useAuth();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const [password, setPassword] = useState("");
+  const [active, setActive] = useState(false);
 
   const handleLogin = () => {
     axios
@@ -36,19 +39,29 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    if (username && password) setActive(true);
+    else setActive(false)
+  }, [username, password]);
+
   return (
     <>
-      <div className="signIn">
-        <div>
-          <div className="username">로그인</div>
-          <input type="text" onChange={onChangeUsername} />
+      <Header />
+      <main>
+        <div className="signIn">
+          <div className="title">로그인</div>
+          <div>
+            <input type="text" onChange={onChangeUsername} placeholder="이메일 입력" />
+          </div>
+          <div>
+            <input type="text" onChange={onChangePassword} placeholder="비밀번호 입력" />
+          </div>
+          <button className={active ? "" : "inactive"} onClick={handleLogin}>
+            로그인
+          </button>
         </div>
-        <div>
-          <div className="password">비밀번호</div>
-          <input type="text" onChange={onChangePassword} />
-        </div>
-      </div>
-      <button onClick={handleLogin}>로그인</button>
+      </main>
+      <Footer />
     </>
   );
 };

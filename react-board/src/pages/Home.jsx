@@ -7,7 +7,7 @@ function Home() {
     <>
       <Header />
       <MainSection />
-      <Footer/>
+      <Footer />
     </>
   );
 }
