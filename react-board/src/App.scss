@@ -1,5 +1,8 @@
 @use "sass:list";
-$colors: #e53a40, #efdc05, #5cab7d, #30a9de, #ffffff, #222222;
+$grey: #e0e3da;
+$fontSmall: 0.938rem;
+$fontMedium: 1rem;
+$fontBig: 1.25rem;
 
 #root {
   width: 100%;
@@ -27,10 +30,79 @@ nav {
 }
 nav ul {
   justify-content: space-around;
-  font-size: 1.25rem;
+  font-size: $fontMedium;
 }
 nav a {
   text-decoration-line: none;
   color: #222222;
   padding-top: 5px;
+}
+
+//Main Section
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+  margin-top: 50px;
+}
+
+//User Info Section
+#userInfo > div,
+#userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#userInfo {
+  flex-direction: row;
+  gap: 10px;
+  padding: 1.25rem;
+  margin-bottom: 2.5rem;
+  font-size: $fontSmall;
+  background-color: $grey;
+}
+#userInfo > div {
+  gap: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.profile {
+  width: 50px;
+  height: 50px;
+}
+
+//Article Section
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+article h2 {
+  width: 100%;
+  padding: 0.625rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+  font-size: $fontMedium;
+  background-color: #e0e3da;
+}
+.contentTable {
+  font-size: $fontSmall;
+  text-align: center;
+}
+.contentTable tr th {
+  padding: 0.625rem;
+  font-size: $fontMedium;
+}
+.contentTable tr {
+  border-bottom: solid 1px $grey;
+}
+.contentTable .title {
+  min-width: 100px;
+  padding: 1.25rem;
+}
+.contentTable .category span {
+  padding: 0.313rem;
+  border-radius: 20px;
+  background-color: #8fbc94;
 }

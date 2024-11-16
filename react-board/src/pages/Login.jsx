@@ -4,10 +4,9 @@ import { useState } from "react";
 import axios from "axios";
 
 const Login = () => {
-  const { setToken } = useAuth();
+  const { setToken, setUsername, username } = useAuth();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
