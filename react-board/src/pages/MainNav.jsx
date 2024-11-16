@@ -18,7 +18,9 @@ function MainNav() {
       </Link>
       <nav>
         <ul>
-          <li>글 목록</li>
+          <Link to="/list">
+            <li>글 목록</li>
+          </Link>
           {!token && (
             <Link to="/login">
               <li>로그인</li>

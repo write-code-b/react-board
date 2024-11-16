@@ -1,4 +1,5 @@
 import { useAuth } from "../provider/authProvider";
+import Table from "./Table";
 
 function MainSection() {
   const { token, id } = useAuth();
@@ -18,20 +19,7 @@ function MainSection() {
           )}
           <article>
             <h2>최신 글</h2>
-            <table className="contentTable">
-              <tr>
-                <th> </th>
-                <th>제목</th>
-                <th>작성자</th>
-              </tr>
-              <tr>
-                <td className="category">
-                  <span>NOTICE</span>
-                </td>
-                <td className="title">제목1입니다. 제목1입니다. 제목1입니다.</td>
-                <td className="name">최민지</td>
-              </tr>
-            </table>
+            <Table />
           </article>
         </section>
       </main>
