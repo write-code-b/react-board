@@ -6,9 +6,10 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const Login = () => {
-  const { setToken, setUsername, username } = useAuth();
+  const { setToken, setId } = useAuth();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [active, setActive] = useState(false);
 
@@ -21,7 +22,9 @@ const Login = () => {
       .then((res) => {
         if (res.data.accessToken) {
           localStorage.setItem("login-token", res.data.accessToken);
+          localStorage.setItem("userId", username);
           setToken(res.data.accessToken);
+          setId(username);
         }
         navigate("/", { replace: true });
       })
@@ -41,7 +44,7 @@ const Login = () => {
 
   useEffect(() => {
     if (username && password) setActive(true);
-    else setActive(false)
+    else setActive(false);
   }, [username, password]);
 
   return (

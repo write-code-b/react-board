@@ -1,7 +1,7 @@
 import { useAuth } from "../provider/authProvider";
 
 function MainSection() {
-  const { token, username } = useAuth();
+  const { token, id } = useAuth();
 
   return (
     <>
@@ -12,7 +12,7 @@ function MainSection() {
               <img src="../public/profile.png" className="profile" alt="" />
               <div>
                 <span className="name">안녕하세요,</span>
-                <span className="userId">아이디 ({username})</span>
+                <span className="userId">아이디 ({id})</span>
               </div>
             </div>
           )}
