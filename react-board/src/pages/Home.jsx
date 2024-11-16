@@ -1,7 +1,11 @@
+import Header from "./Header";
+
 function Home() {
-  return <>
-    <h1>home page</h1>
-  </>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default Home;
