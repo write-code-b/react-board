@@ -1,5 +1,6 @@
 @use "sass:list";
 $grey: #e0e3da;
+$lightBlack: #252c41;
 $fontSmall: 0.938rem;
 $fontMedium: 1rem;
 $fontBig: 1.25rem;
@@ -105,4 +106,28 @@ article h2 {
   padding: 0.313rem;
   border-radius: 20px;
   background-color: #8fbc94;
+}
+
+// Footer
+#footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: $fontSmall;
+  text-align: center;
+  color: $lightBlack;
+}
+#footer a {
+  text-decoration: none;
+  color: $lightBlack;
+}
+#footer > div {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.875rem;
 }
