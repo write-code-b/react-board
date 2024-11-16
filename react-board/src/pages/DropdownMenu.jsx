@@ -1,11 +1,18 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
 
 const DropdownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
   const { token } = useAuth();
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setToken();
+    navigate("/", { replace: true });
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -41,7 +48,7 @@ const DropdownMenu = () => {
         )}
         {token && (
           <Link to="/logout">
-            <li>로그아웃</li>
+            <li onClick={handleLogout}>로그아웃</li>
           </Link>
         )}
       </ul>

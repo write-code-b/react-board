@@ -1,8 +1,15 @@
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
-import { Link } from "react-router-dom";
 
 function MainNav() {
   const { token } = useAuth();
+  const { setToken } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setToken();
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className="mainNav">
@@ -19,7 +26,7 @@ function MainNav() {
           )}
           {token && (
             <Link to="/logout">
-              <li>로그아웃</li>
+              <li onClick={handleLogout}>로그아웃</li>
             </Link>
           )}
         </ul>
