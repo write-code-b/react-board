@@ -1,0 +1,9 @@
+@use "sass:list";
+$colors: #e53a40, #efdc05, #5cab7d, #30a9de, #ffffff, #222222;
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
