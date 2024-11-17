@@ -4,6 +4,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ContentList from "../pages/ContentList";
+import WriteContent from "../pages/WriteContent";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -34,6 +35,10 @@ const Routes = () => {
           path: "/list",
           element: <ContentList />,
         },
+        {
+          path: "/write",
+          element: <WriteContent />,
+        },
       ],
     },
   ];
@@ -50,6 +55,10 @@ const Routes = () => {
     },
     {
       path: "/list",
+      element: <Login />,
+    },
+    {
+      path: "/write",
       element: <Login />,
     },
   ];

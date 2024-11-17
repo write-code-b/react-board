@@ -1,6 +1,7 @@
 @use "sass:list";
 $grey: #e0e3da;
 $lightBlack: #252c41;
+$lightGrey: #f0f5f9;
 $fontSmall: 0.938rem;
 $fontMedium: 1rem;
 $fontBig: 1.25rem;
@@ -152,6 +153,68 @@ article h2 {
   padding: 0.313rem;
   border-radius: 20px;
   background-color: #8fbc94;
+}
+
+//WriteContent
+#contentForm,
+.top,
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#contentForm {
+  width: 50%;
+  gap: 20px;
+}
+#contentForm h2 {
+  align-self: flex-start;
+  font-size: $fontBig;
+}
+#contentForm .top {
+  width: 100%;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 40px;
+  border: solid 1px $lightGrey;
+  border-radius: 10px;
+}
+#contentForm select {
+  width: 15rem;
+  height: 1.875rem;
+  border: none;
+  border-bottom: solid 2px $lightGrey;
+  font-size: $fontSmall;
+  text-overflow: ellipsis;
+}
+#contentForm .title {
+  width: 100%;
+}
+#contentForm .title input {
+  width: 100%;
+  height: 1.875rem;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: $lightGrey;
+}
+#contentForm .bottom {
+  width: 100%;
+  padding: 2.5rem;
+  border: solid 1px $lightGrey;
+  border-radius: 10px;
+}
+#contentForm .bottom textarea {
+  width: 100%;
+  height: 6.25rem;
+  padding: 2.5rem;
+  border: none;
+}
+#contentForm button {
+  width: 10rem;
+  color: #ffffff;
+  background-color: #0250bb;
 }
 
 //Login

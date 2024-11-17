@@ -49,6 +49,11 @@ const DropdownMenu = () => {
           </Link>
         )}
         {token && (
+          <Link to="/write">
+            <li>글쓰기</li>
+          </Link>
+        )}
+        {token && (
           <Link to="/logout">
             <li onClick={handleLogout}>로그아웃</li>
           </Link>
