@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
-import Table from "./Table";
 
 function MainSection() {
   const { token } = useAuth();
@@ -24,14 +23,6 @@ function MainSection() {
               )}
             </div>
           </div>
-          <article>
-            {token && (
-              <div className="Content">
-                <h2>최신 글</h2>
-                <Table />
-              </div>
-            )}
-          </article>
         </section>
       </main>
     </>
