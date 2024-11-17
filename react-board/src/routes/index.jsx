@@ -14,10 +14,6 @@ const Routes = () => {
       path: "/",
       element: <Home />,
     },
-    {
-      path: "/list",
-      element: <ContentList />,
-    },
   ];
 
   //로그인 인증시 공개 페이지
@@ -34,6 +30,10 @@ const Routes = () => {
           path: "/logout",
           element: "/",
         },
+        {
+          path: "/list",
+          element: <ContentList />,
+        },
       ],
     },
   ];
@@ -46,6 +46,10 @@ const Routes = () => {
     },
     {
       path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/list",
       element: <Login />,
     },
   ];
