@@ -5,25 +5,24 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [token, setToken_] = useState(localStorage.getItem("login-token"));
-  const [id, setId_] = useState(localStorage.getItem("userId"));
+  const [refreshToken, setRefreshToken_] = useState(localStorage.getItem("refresh-token"));
 
   const setToken = (newToken) => {
     setToken_(newToken);
   };
 
-  const setId = (newId) => {
-    setId_(newId);
+  const setRefreshToken= (newRefreshToekn) => {
+    setRefreshToken_(newRefreshToekn);
   };
 
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       localStorage.setItem("login-token", token);
-      localStorage.setItem("userId", id);
+      localStorage.setItem("refresh-token", refreshToken);
     } else {
       delete axios.defaults.headers.common["Authorization"];
-      localStorage.removeItem("login-token");
-      localStorage.removeItem("userId");
+      localStorage.clear();
     }
   }, [token]);
 
@@ -31,10 +30,10 @@ const AuthProvider = ({ children }) => {
     () => ({
       token,
       setToken,
-      id,
-      setId,
+      refreshToken,
+      setRefreshToken,
     }),
-    [token, id]
+    [token, refreshToken]
   );
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;

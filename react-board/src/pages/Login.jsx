@@ -6,7 +6,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const Login = () => {
-  const { setToken, setId } = useAuth();
+  const { setToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const [username, setUsername] = useState("");
@@ -21,10 +21,8 @@ const Login = () => {
 
       .then((res) => {
         if (res.data.accessToken) {
-          localStorage.setItem("login-token", res.data.accessToken);
-          localStorage.setItem("userId", username);
           setToken(res.data.accessToken);
-          setId(username);
+          setRefreshToken(res.data.refreshToken);
         }
         navigate("/", { replace: true });
       })
