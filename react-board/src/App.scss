@@ -1,5 +1,6 @@
 @use "sass:list";
 $grey: #e0e3da;
+$blue: #0250bb;
 $lightBlack: #252c41;
 $lightGrey: #f0f5f9;
 $fontSmall: 0.938rem;
@@ -47,7 +48,7 @@ nav ul {
   gap: 100px;
   font-size: $fontMedium;
 }
-nav a {
+a {
   text-decoration-line: none;
   color: #222222;
   padding-top: 5px;
@@ -135,6 +136,7 @@ article h2 {
   background-color: #e0e3da;
 }
 .contentTable {
+  width: 100%;
   font-size: $fontSmall;
   text-align: center;
 }
@@ -259,6 +261,58 @@ article h2 {
   background-color: $grey;
   pointer-events: none;
 }
+
+//ContentList
+.navigatePage,
+.navigatePage span,
+.navigatePage .pageNums,
+.navigatePage .pageNums a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navigatePage {
+  gap: 0.625rem;
+  margin-top: 3.125rem;
+  padding: 0.625rem;
+  background-color: $grey;
+}
+.navigatePage span {
+  font-size: $fontSmall;
+  cursor: pointer;
+}
+.navigatePage span.hidden {
+  display: none;
+  opacity: 0;
+}
+.navigatePage .previous::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("../public/bracket.png") center / contain no-repeat;
+}
+.navigatePage .pageNums {
+  gap: 10px;
+}
+.navigatePage .pageNums a {
+  width: 25px;
+  height: 25px;
+  padding: 0.313rem;
+  font-size: $fontSmall;
+  cursor: pointer;
+}
+.navigatePage .pageNums a.active {
+  color: $blue;
+  background-color: #ffffff;
+}
+.navigatePage .after::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: url("../public/bracket.png") center / contain no-repeat;
+  transform: scale(-1, 1);
+}
+
 // Footer
 #footer {
   display: flex;
