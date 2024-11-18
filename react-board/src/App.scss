@@ -3,6 +3,9 @@ $grey: #e0e3da;
 $blue: #0250bb;
 $lightBlack: #252c41;
 $lightGrey: #f0f5f9;
+$darkGrey: #566270;
+$green: #8fbc94;
+$fontMaxSmall: 0.75rem;
 $fontSmall: 0.938rem;
 $fontMedium: 1rem;
 $fontBig: 1.25rem;
@@ -89,18 +92,32 @@ a {
 
 //Main Section
 section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 300px;
+  width: 60%;
+  min-width: 500px;
+  margin: 0 auto;
   margin-top: 50px;
+}
+section .wrap {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+section h2 {
+  padding: 0.625rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+  font-size: $fontMedium;
+  background-color: #e0e3da;
 }
 
 //User Info Section
 #userInfo > div,
-#userInfo {
+#userInfo,
+#userInfo .info,
+#userInfo .userId {
   display: flex;
-  flex-direction: column;
   align-items: center;
 }
 #userInfo {
@@ -113,28 +130,21 @@ section {
 }
 #userInfo > div {
   gap: 5px;
-  flex-direction: column;
-  align-items: flex-start;
 }
 .profile {
   width: 50px;
   height: 50px;
 }
-
-//Article Section
-article {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#userInfo .info {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-article h2 {
-  width: 100%;
-  padding: 0.625rem;
-  margin-bottom: 1.25rem;
+#userInfo .userId {
   text-align: left;
-  font-size: $fontMedium;
-  background-color: #e0e3da;
 }
+
+//Table Section
 .contentTable {
   width: 100%;
   font-size: $fontSmall;
@@ -151,43 +161,48 @@ article h2 {
   min-width: 100px;
   padding: 1.25rem;
 }
-.contentTable .category span {
+.categoryTag {
   padding: 0.313rem;
   border-radius: 20px;
-  background-color: #8fbc94;
+  background-color: $green;
+  font-size: $fontMedium;
 }
 
 //WriteContent
-#contentForm,
-.top,
-.bottom {
+#contentForm .top,
+#contentForm .bottom {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-#contentForm {
-  width: 50%;
-  gap: 20px;
+  padding: 40px;
 }
 #contentForm h2 {
+  width: 100%;
   align-self: flex-start;
+  background-color: transparent;
   font-size: $fontBig;
 }
 #contentForm .top {
   width: 100%;
   gap: 20px;
   align-items: flex-start;
-  padding: 40px;
+}
+.lineBox {
   border: solid 1px $lightGrey;
   border-radius: 10px;
 }
-#contentForm select {
+#contentForm .selectBox {
   width: 15rem;
   height: 1.875rem;
+  position: relative;
+  font-size: $fontSmall;
+}
+#contentForm select {
+  width: inherit;
+  height: inherit;
   border: none;
   border-bottom: solid 2px $lightGrey;
-  font-size: $fontSmall;
   text-overflow: ellipsis;
 }
 #contentForm .title {
@@ -203,9 +218,6 @@ article h2 {
 }
 #contentForm .bottom {
   width: 100%;
-  padding: 2.5rem;
-  border: solid 1px $lightGrey;
-  border-radius: 10px;
 }
 #contentForm .bottom textarea {
   width: 100%;
@@ -217,6 +229,12 @@ article h2 {
   width: 10rem;
   color: #ffffff;
   background-color: #0250bb;
+}
+#contentForm button.inactive {
+  border: none;
+  color: #222222;
+  background-color: $grey;
+  pointer-events: none;
 }
 
 //Login
@@ -255,7 +273,7 @@ article h2 {
   background-color: #0250bb;
 }
 
-.signIn button.inactive {
+button.inactive {
   border: none;
   color: #222222;
   background-color: $grey;
@@ -263,6 +281,9 @@ article h2 {
 }
 
 //ContentList
+#contentList h2 {
+  width: 100%;
+}
 .navigatePage,
 .navigatePage span,
 .navigatePage .pageNums,
@@ -313,6 +334,55 @@ article h2 {
   transform: scale(-1, 1);
 }
 
+//ContentDetail
+#contentDetail,
+#contentDetail .wrap,
+#contentDetail .top,
+#contentDetail .content,
+#contentDetail .userInfo,
+#contentDetail .userInfo > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#contentDetail .top {
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  padding: 40px;
+}
+#contentDetail h3 {
+  font-size: $fontBig;
+  font-weight: 600;
+}
+#contentDetail .content {
+  width: 100%;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 40px;
+  font-size: $fontMedium;
+}
+#contentDetail .userInfo {
+  gap: 10px;
+}
+#contentDetail .userInfo img {
+  width: 45px;
+  height: 45px;
+}
+#contentDetail .userInfo > div {
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: $fontSmall;
+}
+#contentDetail .name {
+  font-weight: 500;
+}
+#contentDetail .createdAt {
+  font-size: 0.75rem;
+  color: $darkGrey;
+}
+
 // Footer
 #footer {
   display: flex;
@@ -358,6 +428,28 @@ article h2 {
 
   .signIn {
     width: 80%;
+  }
+
+  section {
+    min-width: 280px;
+  }
+  //table section
+  .contentTable {
+    font-size: $fontSmall;
+  }
+  .contentTable,
+  .contentTable tr th,
+  .categoryTag {
+    font-size: $fontMaxSmall;
+  }
+  .contentTable .title {
+    min-width: 50px;
+    padding: 0.75rem;
+  }
+
+  .navigatePage .pageNums a {
+    width: 10px;
+    height: 10px;
   }
 }
 

@@ -1,10 +1,11 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ContentList from "../pages/ContentList";
 import WriteContent from "../pages/WriteContent";
+import ContentDetail from "../pages/ContentDetail";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -15,6 +16,7 @@ const Routes = () => {
       path: "/",
       element: <Home />,
     },
+    { path: "*", element: <Navigate to="/" /> },
   ];
 
   //로그인 인증시 공개 페이지
@@ -39,6 +41,7 @@ const Routes = () => {
           path: "/write",
           element: <WriteContent />,
         },
+        { path: "/contents/:id", element: <ContentDetail /> },
       ],
     },
   ];

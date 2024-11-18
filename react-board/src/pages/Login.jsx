@@ -9,13 +9,15 @@ const Login = () => {
   const { setToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
   const baseUrl = import.meta.env.VITE_BASE_URL;
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [loginInfo, setLoginInfo] = useState({
+    username: "",
+    password: "",
+  });
   const [active, setActive] = useState(false);
 
   const handleLogin = () => {
     axios
-      .post(`${baseUrl}/auth/signin`, JSON.stringify({ username, password }), {
+      .post(`${baseUrl}/auth/signin`, JSON.stringify(loginInfo), {
         headers: { "Content-Type": `application/json` },
       })
 
@@ -32,36 +34,34 @@ const Login = () => {
       });
   };
 
-  const onChangeUsername = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setLoginInfo({
+      ...loginInfo,
+      [name]: value,
+    });
   };
 
   useEffect(() => {
-    if (username && password) setActive(true);
+    if (loginInfo.username && loginInfo.password) setActive(true);
     else setActive(false);
-  }, [username, password]);
+  }, [loginInfo]);
 
   return (
     <>
       <Header />
-      <main>
-        <div className="signIn">
-          <div className="title">로그인</div>
-          <div>
-            <input type="text" onChange={onChangeUsername} placeholder="이메일 입력" />
-          </div>
-          <div>
-            <input type="text" onChange={onChangePassword} placeholder="비밀번호 입력" />
-          </div>
-          <button className={active ? "" : "inactive"} onClick={handleLogin}>
-            로그인
-          </button>
+      <div className="signIn">
+        <div className="title">로그인</div>
+        <div>
+          <input type="text" name="username" onChange={onChange} placeholder="이메일 입력" />
         </div>
-      </main>
+        <div>
+          <input type="password" name="password" onChange={onChange} placeholder="비밀번호 입력" />
+        </div>
+        <button className={active ? "" : "inactive"} onClick={handleLogin}>
+          로그인
+        </button>
+      </div>
       <Footer />
     </>
   );
