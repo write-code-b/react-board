@@ -30,6 +30,7 @@ const Login = () => {
       })
 
       .catch((err) => {
+        alert("잘못된 아이디/비밀번호입니다.");
         console.error(err);
       });
   };
@@ -50,18 +51,23 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="signIn">
-        <div className="title">로그인</div>
-        <div>
-          <input type="text" name="username" onChange={onChange} placeholder="이메일 입력" />
+      <section id="signIn">
+        <div className="wrap">
+          <h2>로그인</h2>
+          <div className="loginBox">
+            <div>
+              <input type="text" name="username" onChange={onChange} placeholder="이메일 입력" autoFocus />
+            </div>
+            <div>
+              <input type="password" name="password" onChange={onChange} placeholder="비밀번호 입력" />
+            </div>
+            <button className={active ? "" : "inactive"} onClick={handleLogin}>
+              로그인
+            </button>
+            <a href="/signup">회원가입</a>
+          </div>
         </div>
-        <div>
-          <input type="password" name="password" onChange={onChange} placeholder="비밀번호 입력" />
-        </div>
-        <button className={active ? "" : "inactive"} onClick={handleLogin}>
-          로그인
-        </button>
-      </div>
+      </section>
       <Footer />
     </>
   );
