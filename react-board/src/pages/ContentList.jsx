@@ -1,56 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 import Header from "./Header";
 import Footer from "./Footer";
 import Table from "./Table";
+import Pagination from "./Pagination";
 
 function ContentList() {
-  const [pageActive, setPageActive] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [contentListData, setContentListData] = useState([]);
+  const page = searchParams.get("page") || 0;
+  const size = 10;
 
-  const contentData = {
-    content: [],
-    totalPages: 1,
-    totalElements: 18,
-    last: false,
-    numberOfElements: 10,
-    size: 10,
-    number: 0,
-    sort: {
-      unsorted: true,
-      sorted: false,
-      empty: true,
-    },
-    first: true,
-    empty: false,
+  //글 목록 조회
+  const getContentListData = () => {
+    axios
+      .get("/boards", { params: { page, size } })
+      .then(function (res) {
+        setContentListData(res);
+        return res;
+      })
+      .catch(function (err) {
+        console.error(err);
+        //console.info(error.config);
+      });
   };
-  const content = contentData.content;
 
-  const onClickPageNum = (e) => {
-    if (pageActive) setPageActive(false);
-    else setPageActive(true);
-  };
+  useEffect(() => {
+    getContentListData();
+  }, []);
 
   return (
     <>
       <>
         <Header />
-        <section>
-          <article>
+        <section id="contentList">
+          <div className="wrap">
             <h2>전체 게시글</h2>
-            <Table content={content} />
-            <div className="navigatePage">
-              <span className={`previous ${contentData.first ? "hidden" : ""}`}>이전</span>
-              <div className="pageNums">
-                {[...Array(contentData.numberOfElements)].map((value, index) => {
-                  return (
-                    <a key={index} href="" className={pageActive ? "" : "active"} onClick={onClickPageNum}>
-                      {index + 1}
-                    </a>
-                  );
-                })}
-              </div>
-              <span className={`after ${contentData.last ? "hidden" : ""}`}>다음</span>
-            </div>
-          </article>
+            <Table content={contentListData.content} />
+            <Pagination first={contentListData.first} last={contentListData.last} totalPages={contentListData.totalPages} currentPage={contentListData.number + 1} pageCount={contentListData.numberOfElements} />
+          </div>
         </section>
         <Footer />
       </>

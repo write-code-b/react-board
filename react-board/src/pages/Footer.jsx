@@ -3,7 +3,7 @@ function Footer() {
     <>
       <div id="footer">
         <div>
-          <a target="_blank" href="https://github.com/write-code-b/Conan-Card">
+          <a target="_blank" href="https://github.com/write-code-b">
             © 2024 website by @write_code_b
           </a>
           <a target="_blank" href="https://icons8.com">

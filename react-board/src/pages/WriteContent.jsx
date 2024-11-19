@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import Select from "react-select";
 import Header from "./Header";
 import Footer from "./Footer";
 
 function WriteContent() {
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
-  const [category, setCategory] = useState("");
   const [content, setContent] = useState({
     title: "",
     content: "",
+    category: "",
   });
   const options = [
     { value: "NOTICE", label: "NOTICE" },
@@ -17,20 +20,46 @@ function WriteContent() {
     { value: "ETC", label: "ETC" },
   ];
 
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    setContent({
-      ...content,
-      [name]: value,
-    });
+  const createContent = () => {
+    const formData = new FormData();
+    formData.append("request", JSON.stringify(content));
+
+    axios
+      .post("/boards", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+
+      .then((res) => {
+        alert("글 작성을 완료했습니다.");
+        navigate("/list");
+      })
+
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
-  const onChangeCategory = (e) => {
-    setCategory(e.value);
+  const onChange = (e) => {
+    if (e.target) {
+      const { value, name } = e.target;
+      setContent({
+        ...content,
+        [name]: value,
+      });
+    } else {
+      setContent({
+        ...content,
+        ["category"]: e.value,
+      });
+    }
+  };
+
+  const onSubmit = () => {
+    createContent();
   };
 
   useEffect(() => {
-    if (category && content.title && content.content) setActive(true);
+    if (content.category && content.title && content.content) setActive(true);
     else setActive(false);
   }, [content]);
 
@@ -44,7 +73,7 @@ function WriteContent() {
             <div className="top lineBox">
               <div className="category">
                 <div className="selectBox">
-                  <Select options={options} onChange={onChangeCategory} placeholder={"카테고리를 선택해주세요."} defaultValue={"FREE"} />
+                  <Select options={options} onChange={onChange} placeholder={"카테고리를 선택해주세요."} defaultValue={"FREE"} />
                 </div>
               </div>
               <div className="title">
@@ -54,7 +83,9 @@ function WriteContent() {
             <div className="bottom lineBox">
               <textarea name="content" onChange={onChange} placeholder="내용을 입력하세요."></textarea>
             </div>
-            <button className={active ? "" : "inactive"}>글 등록</button>
+            <button className={active ? "" : "inactive"} onClick={onSubmit}>
+              글 등록
+            </button>
           </div>
         </section>
         <Footer />
