@@ -26,6 +26,11 @@ function MainNav() {
               <li>로그인</li>
             </Link>
           )}
+          {!token && (
+            <Link to="/signup">
+              <li>회원가입</li>
+            </Link>
+          )}
           {token && (
             <Link to="/write">
               <li>글쓰기</li>

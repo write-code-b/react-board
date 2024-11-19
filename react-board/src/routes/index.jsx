@@ -3,6 +3,7 @@ import { useAuth } from "../provider/authProvider";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 import ContentList from "../pages/ContentList";
 import WriteContent from "../pages/WriteContent";
 import ContentDetail from "../pages/ContentDetail";
@@ -55,6 +56,10 @@ const Routes = () => {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <SignUp />,
     },
     {
       path: "/list",
