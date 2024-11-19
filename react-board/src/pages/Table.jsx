@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import convertDateTime from "../utils/utilFuncion";
 
 function Table(props) {
@@ -8,20 +9,22 @@ function Table(props) {
           <tr>
             <th> </th>
             <th>제목</th>
-            <th>작성자</th>
+            {/* <th>작성자</th> */}
             <th>작성일</th>
           </tr>
         </thead>
         <tbody>
-          {props.content.map((value, index) => {
+          {props.content?.map((data, index) => {
             return (
-              <tr>
+              <tr key={data.id}>
                 <td>
-                  <span className="categoryTag">{value.category}</span>
+                  <span className="categoryTag">{data.category}</span>
                 </td>
-                <td className="title">{value.title}</td>
-                <td className="name">최민지</td>
-                <td className="createdAt">{convertDateTime(value.createdAt)}</td>
+                <td className="title">
+                  <Link to={`/contents/${data.id}`}>{data.title}</Link>
+                </td>
+                {/* <td className="name"></td> */}
+                <td className="createdAt">{convertDateTime(data.createdAt)}</td>
               </tr>
             );
           })}
