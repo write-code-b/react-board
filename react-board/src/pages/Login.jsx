@@ -8,7 +8,6 @@ import Footer from "./Footer";
 const Login = () => {
   const { setToken, setRefreshToken } = useAuth();
   const navigate = useNavigate();
-  const baseUrl = import.meta.env.VITE_BASE_URL;
   const [loginInfo, setLoginInfo] = useState({
     username: "",
     password: "",
@@ -17,7 +16,7 @@ const Login = () => {
 
   const handleLogin = () => {
     axios
-      .post(`${baseUrl}/auth/signin`, JSON.stringify(loginInfo), {
+      .post("/auth/signin", JSON.stringify(loginInfo), {
         headers: { "Content-Type": `application/json` },
       })
 

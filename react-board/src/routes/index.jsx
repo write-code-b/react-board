@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
+import axios from "axios";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -7,6 +8,8 @@ import SignUp from "../pages/SignUp";
 import ContentList from "../pages/ContentList";
 import WriteContent from "../pages/WriteContent";
 import ContentDetail from "../pages/ContentDetail";
+import EditContent from "../pages/EditContent";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const Routes = () => {
   const { token } = useAuth();
@@ -41,6 +44,10 @@ const Routes = () => {
         {
           path: "/write",
           element: <WriteContent />,
+        },
+        {
+          path: "/edit/:id",
+          element: <EditContent />,
         },
         { path: "/contents/:id", element: <ContentDetail /> },
       ],
